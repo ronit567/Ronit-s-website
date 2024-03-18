@@ -3,8 +3,6 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with Steller landing page.">
-    <meta name="author" content="Devcrud">
     <title>Ronit Longia's Webpage</title>
     <!-- font icons -->
     <link rel="stylesheet" href="./icons.css">
@@ -48,7 +46,7 @@
                 <p>Student Web & Software Developer</p>
 
                 <div class="buttons pt-3">
-                    <a href="assets/imgs/ronit.pdf" download>
+                    <a href="./imgs/ronit.pdf" download>
                         <button class="btn btn-dark rounded">DOWNLOAD CV</button>
                     </a>
                 </div>                
@@ -191,15 +189,52 @@
         </div>
     </footer> 
     <!-- End of page footer -->
-	
-	<!-- core  -->
-    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
-    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
-    <!-- bootstrap 3 affix -->
-	<script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
-
-    <!-- steller js -->
-    <script src="/steller.js"></script>
-
+    <script src="steller.js"></script>
 </body>
 </html>
+
+<style>
+    .navbar .nav-link.active {
+        color: blue; /* Change to the desired color */
+        font-weight: bold; /* Optional: Change other visual properties */
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var sections = document.querySelectorAll("section");
+        var navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+
+        function highlightNavLink() {
+            var scrollPosition = window.scrollY;
+
+            if (scrollPosition === 0) {
+                // If the scroll position is at the top of the page
+                navLinks.forEach(function(link) {
+                    if (link.getAttribute("href") === "#home") {
+                        link.classList.add("active");
+                    } else {
+                        link.classList.remove("active");
+                    }
+                });
+                return;
+            }
+
+            sections.forEach(function(section) {
+                if (scrollPosition >= section.offsetTop - 50 && scrollPosition < section.offsetTop + section.offsetHeight - 50) {
+                    var targetId = section.getAttribute("id");
+                    navLinks.forEach(function(link) {
+                        if (link.getAttribute("href").slice(1) === targetId) {
+                            link.classList.add("active");
+                        } else {
+                            link.classList.remove("active");
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener("scroll", highlightNavLink);
+        highlightNavLink(); // Initial highlighting when the page loads
+    });
+</script>
